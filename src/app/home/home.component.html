@@ -1,0 +1,53 @@
+<div class="card-container">
+  <h1 x-large class="sample-content">Your Content Here</h1>
+
+  <hr>
+  <div>
+    <input type="text" name="film" #box (keyup.enter)="searchForFilm(box.value)">
+    <button class="film-search" (click)="searchForFilm(box.value)">Search film</button>
+  </div>
+  <ul *ngIf="filmGenres">
+    <li *ngFor="let genre of filmGenres">
+      <label>
+        <input type="checkbox" name="genre" [(ngModel)]="genre.selected" (change)="bringGenreFilms(genre.id, genre.selected)">
+        {{genre.name}}
+      </label>
+    </li>
+    <!--<li>-->
+      <!--<label>-->
+        <!--<input type="checkbox" name="isActive"  [(ngModel)]="">-->
+        <!--Is Active-->
+      <!--</label>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<label>-->
+        <!--<input type="checkbox" name="isActive"  [(ngModel)]="">-->
+        <!--Is Active-->
+      <!--</label>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<label>-->
+        <!--<input type="checkbox" name="isActive"  [(ngModel)]="">-->
+        <!--Is Active-->
+      <!--</label>-->
+    <!--</li>-->
+  </ul>
+  <div class="wrapper">
+    <div class="box a">A</div>
+    <div class="box b">B</div>
+    <div class="box c">C</div>
+    <div class="box d">D</div>
+    <div class="box e">E</div>
+    <div class="box f">F</div>
+  </div>
+
+
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+  <div class="floating-box">Floating box</div>
+</div>
