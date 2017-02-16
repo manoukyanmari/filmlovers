@@ -7,6 +7,7 @@ import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
 import {FilmSearchService} from "../services/film-search.service";
+declare var $: any;
 
 @Component({
   // The selector is what angular internally uses
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
   public filmGenres: any;
   public filmListViaGenre: any[]=[];
   public checkedGenres: any[] = [];
+  public films: any[] = [];
+  public sameElements: any[] = [];
 
   constructor(public filmSearchService: FilmSearchService) {
 
@@ -59,8 +62,37 @@ export class HomeComponent implements OnInit {
     this.filmListViaGenre = [];
     this.checkedGenres.forEach((value)=>{
       this.filmSearchService.getFilmsViaGenre(value).then((response)=>{
-        this.filmListViaGenre.push(response);
+        this.filmListViaGenre.push(response.results);
+        this.films = Array.prototype.concat.apply([], this.filmListViaGenre);
+        var k;
+        for (var j = 0; j < response.results.length; j++) {
+          // for(var i = 0; i < this.filmListViaGenre.length; i++) {
+          //   if (this.filmListViaGenre[i].id == response.results[j].id) {
+          //     this.filmListViaGenre.splice(i, 1);
+          //   } else {
+          //     this.filmListViaGenre.push(response.results[j]);
+          //   }
+          // }
+          var sameElements = [];
+          var tooltipsData = this.filmListViaGenre.filter(function (element, index) {
+            if(element.id === response.results[j].id){
+              sameElements.push(index);
+            }
+          });
+          console.log(sameElements,'dfdfdf');
+          // this.filmListViaGenre.filter((element, index) => {
+          //   console.log(element.id === response.results[j].id,'sas');
+          //   if(element.id === response.results[j].id) {
+          //     k = index;
+          //     this.filmListViaGenre.splice(k, 1);
+          //   }
+          //   this.filmListViaGenre.push(response.results[j]);
+          //
+          // });
+        }
+
         console.log(this.filmListViaGenre);
+        console.log(this.films,'dsdsds');
       })
     });
   }
